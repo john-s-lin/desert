@@ -16,7 +16,6 @@
       },
       "extensions": [
         "charliermarsh.ruff",
-        "eamodio.gitlens",
         "esbenp.prettier-vscode",
         "mechatroner.rainbow-csv",
         "ms-azuretools.vscode-docker",
