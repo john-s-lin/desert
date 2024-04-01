@@ -1,0 +1,15 @@
+ARG VERSION=alpine
+FROM python:${VERSION}
+
+COPY . /docs
+
+VOLUME [ "/docs" ]
+
+RUN apk update && \
+    apk add musl-dev gcc make graphviz
+
+RUN pip install diagrams
+
+WORKDIR /docs
+
+ENTRYPOINT [ "/bin/bash" ]
