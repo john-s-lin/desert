@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  devcontainer-docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/docs
+    stdin_open: true
+    tty: true
