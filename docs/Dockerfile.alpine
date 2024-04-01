@@ -6,7 +6,7 @@ COPY . /docs
 VOLUME [ "/docs" ]
 
 RUN apk update && \
-    apk add bash gcc graphviz make musl-dev
+    apk add bash gcc graphviz make musl-dev ttf-opensans
 
 RUN pip install diagrams
 
