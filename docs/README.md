@@ -2,7 +2,7 @@
 
 This directory uses the Python library `diagrams` in a containerized environment, to explore it's viability as a relevant tool for diagramming as documentation as well as to compare to other WYSIWYG diagram editors.
 
-> Note: `diagrams` does not support `svg` export. All exports will be in `.png`
+> Note: `diagrams` does not support `.svg` export for certain icons. You can still export in `.svg` but if the icons are `.png` you may be SOL.
 
 ## Pros
 
@@ -11,7 +11,7 @@ This directory uses the Python library `diagrams` in a containerized environment
 
 ## Cons
 
-- The dependency, `graphviz`, does not have support to export to vector graphics formats such as `.svg`.
+- The dependency, `graphviz`, does not have support to export to vector graphics formats such as `.svg` when icons are in `.png` format. [Ref: embedded images are not `.svg`](https://github.com/mingrammer/diagrams/issues/26)
 - `draw.io` also supports icons imported through other libraries: [draw.io announcement](https://www.drawio.com/blog/aws-diagrams)
 
 ## Purpose
