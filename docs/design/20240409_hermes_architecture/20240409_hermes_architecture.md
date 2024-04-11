@@ -81,7 +81,7 @@ A patient can be simply represented as composed of `severity_score`, `time_of_ar
 
 `time_of_arrival` should be a `datetime.datetime` component, since we can then calculate total time spent waiting. `datetime.time` is not a good measure since rollover from `11:59:59` is `00:00:00`. For simplicity's sake, we will use an unsigned integer and measure time of arrival as time since start of epoch at `t = 0`. If wait-time increases, then `severity_score` should be increased such that patients that wait longer can be seen sooner.
 
-`time_to_treat` should be an integer component, represented as minutes. Time-to-treat represents an estimated time to treat a patient once a doctor is seen, whether it be as a admittance as a hospital in-patient or a discharge. In this prototype, time to treat will be procedurally generated but will be no less than 15 minutes.
+`time_to_treat` should be an integer component, represented as minutes. Time-to-treat represents an estimated time to treat a patient once a doctor is seen, whether it be as an admittance as a hospital in-patient or a discharge. In this prototype, time-to-treat will be procedurally generated but will be no less than 15 minutes.
 
 ```python
 class Patient:
@@ -97,7 +97,7 @@ class Patient:
 
 ### 2. Hybrid Priority Queue
 
-The hybrid priority queue uses a combined metric for `position_score` which takes a weighted sum of all metrics in a `Patient` class. At this moment, this weighted sum consists of arbitrary coefficients
+The hybrid priority queue uses a combined metric for `position_score` which takes a weighted sum of all metrics in a `Patient` class. At this moment, this weighted sum consists of arbitrary coefficients.
 
 ```python
 class HybridTriageQueue:
@@ -126,7 +126,7 @@ It might be good to also implement a self-reported `burnout_rate = [0.0, 1.0)` a
 new_efficiency = efficiency - burnout_rate
 ```
 
-Another implementation for burnout rate can be exponential decay such that early instances do not deplete doctor efficiency but rapidly degrades over time.
+Another implementation for burnout rate can be exponential decay such that early instances do not deplete doctor efficiency as quickly in the beginning, but the efficiency rapidly degrades over time.
 
 ```python
 new_efficiency = efficiency * (1 - burnout_rate)
@@ -154,14 +154,14 @@ class Doctor:
 
 We considered using a multi-level queue scheduler, with separate queues representing severity (priority), time-of-arrival (FCFS), and time-to-treat (SJF). The order of patients to be served would be determined by majority consensus in all three queues so that patients with the collective lowest rank get seen first. This comes with a few drawbacks:
 
-1. This requires storing 3x as much memory as a single queue, since the program will have to maintain three queues of total size `O(3n)` compared to the hybrid queue described above, which is only size `O(n)`.
-2. To perform a consensus vote on the foremost positions of each queue require re-sorting each queue every time a new patient is enrolled from the PatientStream, which is an `O(nlogn)` operation for each queue. Removal from each queue therefore cannot count on a consensus vote to necessarily be the first element in each queue, so the amortized time complexity for removal is `O(n)`. On the other hand, a single priority queue is `O(1)` peek for a first-position element and a `O(logn)` heapify action, and a `O(logn)` insertion when a patient is enrolled from the PatientStream.
+1. This requires storing 3x as much memory as a single queue, since the program will have to maintain three queues of total size `O(3n)` compared to the hybrid queue described above, which is only of size `O(n)`.
+2. To perform a consensus vote on the foremost positions of each queue require re-sorting each queue each time a new patient is enrolled from the PatientStream, which is an `O(nlogn)` operation for each queue. Removal from each queue therefore cannot count on a patient to necessarily be the first element in each queue, even if they are the consensus vote, so the amortized time complexity for removal is `O(n)`. On the other hand, a single priority queue is `O(1)` peek for a first-position element and a `O(logn)` heapify action, and a `O(logn)` insertion when a patient is enrolled from the PatientStream.
 
 ## Limitations and Future Work
 
 This prototype makes a ton of assumptions on how "things should be" and is a very simple model that is easy to represent as systems and components.
 
-Other health professionals such as nurses are not modeled. Neither are hospital resources such as beds, imaging, laboratory work and more. Adding these entities to this prototype would massively increase the system's complexity. However, in future implementation this will be addressed.
+Other health professionals such as nurses are not modeled. Neither are hospital resources such as beds, imaging, laboratory work and more. Adding these entities to this prototype would massively increase the system's complexity. However, in a future implementation this will be addressed.
 
 ### Machine Learning
 
