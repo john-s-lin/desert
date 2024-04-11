@@ -175,7 +175,7 @@ Implementing machine learning is a massive undertaking. Possible targets include
 - `doctor.burnout_rate`
   - This would probably be an indirect measure based on self-reports by doctors pre-/post-shift on "personal efficacy". Not a good target.
 
-> Caveat: using ML to assign doctors to patients would probably be ill-advised. "Faster" doctors may be preferred by the queue algorithm and assigned more often. This is task-dependent, however.
+> Caveat: using ML to assign doctors to patients would probably be ill-advised. "Faster" doctors may be preferred by the queue algorithm and assigned more often. This is task-dependent, however. If we don't rank doctors and assume a simple FCFS doctor queue, this will be a non-issue.
 
 ## References
 
