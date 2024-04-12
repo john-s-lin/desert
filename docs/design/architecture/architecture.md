@@ -132,7 +132,11 @@ Another implementation for burnout rate can be exponential decay such that early
 new_efficiency = efficiency * (1 - burnout_rate)
 ```
 
-This results in a deterministic function where $$\text{efficiency} = (1-\text{(burnout rate)})^\text{(encounters since epoch)}$$
+This [reference](https://www.hindawi.com/journals/ddns/2020/3475324/) highlights a mathematical model for burnout in teachers that would serve as a good starting point for estimation, but would require empirical data from actual physicians to confirm any sort of hypothesis.
+
+An alternative is a simpler model where $$\text{efficiency}(\text{time}) = \text{initial efficiency}-\text{burnout rate}^\text{time}$$
+
+where `efficiency > 0`, `0 <= burnout_rate < 1` and `time >= 0`.
 
 With this in mind, incorporating some sort of "refractory" or "rest" period may be helpful to "restore" doctor efficiency, such that efficiency is not depleted to 0 over the course of a shift.
 
@@ -182,3 +186,4 @@ Implementing machine learning is a massive undertaking. Possible targets include
 > Note: some references are directly linked to their source above.
 
 - CPU scheduling algorithms: https://www.geeksforgeeks.org/cpu-scheduling-in-operating-systems/
+- Mathematical Model of Burnout: https://www.hindawi.com/journals/ddns/2020/3475324/
