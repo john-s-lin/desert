@@ -2,6 +2,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 
 use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha8Rng;
+use rand_distr::{Distribution, Normal, Uniform};
 
 static ID: AtomicU64 = AtomicU64::new(0);
 
@@ -19,11 +20,13 @@ pub struct DoctorFactory;
 
 impl DoctorFactory {
     fn create_doctor(rng: &mut impl Rng) -> Doctor {
+        let efficiency_range = Normal::new(1.0, 0.2).unwrap();
+        let burnout_range = Uniform::new(0.0, 0.1);
         Doctor {
             id: ID.fetch_add(1, Ordering::SeqCst),
             interaction_time: 0,
-            efficiency: 1.0,
-            burnout_rate: rng.gen_range(0.0..0.2),
+            efficiency: efficiency_range.sample(rng),
+            burnout_rate: burnout_range.sample(rng),
         }
     }
 

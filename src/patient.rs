@@ -5,3 +5,9 @@ struct Patient {
     time_waited: u64,
     time_to_treat: u64,
 }
+
+struct PatientFactory;
+
+impl PatientFactory {
+    fn create_patient(time_of_arrival: u64);
+}
