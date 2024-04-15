@@ -25,4 +25,11 @@ fn main() {
     dbg!(val);
     queue.push(&pt);
     dbg!(&queue);
+
+    for i in 0..10 {
+        let new_pt = PatientFactory::create_patient(&mut rng, 20 + i);
+        dbg!(&new_pt);
+        queue.push(&new_pt);
+    }
+    dbg!(&queue);
 }
