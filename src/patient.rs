@@ -29,4 +29,23 @@ impl PatientFactory {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use rand::SeedableRng;
+    use rand_chacha::ChaCha8Rng;
+
+    use super::PatientFactory;
+
+    const SEED: u64 = 123;
+
+    #[test]
+    fn test_create_patient() {
+        let mut rng = ChaCha8Rng::seed_from_u64(SEED);
+        let pt = PatientFactory::create_patient(&mut rng, 10);
+
+        assert!((0..100).contains(&pt.severity_score));
+        assert_eq!(*&pt.time_waited, 0);
+        assert!((15..60).contains(&pt.time_to_treat));
+    }
 }

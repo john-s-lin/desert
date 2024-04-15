@@ -1,12 +1,9 @@
 use std::sync::atomic::{AtomicU64, Ordering};
 
-use rand::{Rng, SeedableRng};
-use rand_chacha::ChaCha8Rng;
-use rand_distr::{Distribution, Normal, Uniform};
+use rand::Rng;
+use rand_distr::{Distribution, Uniform};
 
 static ID: AtomicU64 = AtomicU64::new(0);
-
-const SEED: u64 = 0;
 
 #[derive(Debug)]
 pub struct Doctor {
@@ -58,5 +55,33 @@ impl DoctorFactory {
             dr_vec.push(dr);
         }
         dr_vec
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use rand::SeedableRng;
+    use rand_chacha::ChaCha8Rng;
+
+    use super::DoctorFactory;
+
+    const SEED: u64 = 123;
+
+    #[test]
+    fn test_create_doctor() {
+        let mut rng = ChaCha8Rng::seed_from_u64(SEED);
+        let dr = DoctorFactory::create_doctor(&mut rng);
+
+        assert_eq!(*&dr.interaction_time, 0);
+        assert!((0.8..1.2).contains(&dr.efficiency));
+        assert!((0.0..0.1).contains(&dr.burnout_rate));
+    }
+
+    #[test]
+    fn test_generate_vec_doctors() {
+        let mut rng = ChaCha8Rng::seed_from_u64(SEED);
+        let dr_vec = DoctorFactory::generate_vec_doctors(10, &mut rng);
+
+        assert_eq!(dr_vec.len(), 10);
     }
 }
