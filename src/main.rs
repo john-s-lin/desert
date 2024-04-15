@@ -1,8 +1,19 @@
+use rand::SeedableRng;
+use rand_chacha::ChaCha8Rng;
+
 use doctor::DoctorFactory;
+use patient::PatientFactory;
 
 mod doctor;
+mod patient;
+
+const SEED: u64 = 0;
 
 fn main() {
-    let vec_docs = DoctorFactory::generate_vec_doctors(10);
+    let mut rng = ChaCha8Rng::seed_from_u64(SEED);
+    let vec_docs = DoctorFactory::generate_vec_doctors(10, &mut rng);
     dbg!(vec_docs);
+
+    let pt = PatientFactory::create_patient(&mut rng, 20);
+    dbg!(pt);
 }
