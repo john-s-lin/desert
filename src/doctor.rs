@@ -19,8 +19,20 @@ pub struct Doctor {
 pub struct DoctorFactory;
 
 impl DoctorFactory {
+    /// Creates a Doctor struct with randomly generated values for `efficiency` and `burnout_rate`
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// // rng is a pre-initialized random number generator that is passed in as an argument
+    /// let dr = create_doctor(&mut rng);
+    ///
+    /// assert_eq!(*&dr.interaction_time, 0);
+    /// assert!((0.8..1.2).contains(&dr.efficiency));
+    /// assert!((0.0..0.1).contains(&dr.burnout_rate));
+    /// ```
     fn create_doctor(rng: &mut impl Rng) -> Doctor {
-        let efficiency_range = Normal::new(1.0, 0.2).unwrap();
+        let efficiency_range = Uniform::new(0.8, 1.2);
         let burnout_range = Uniform::new(0.0, 0.1);
         Doctor {
             id: ID.fetch_add(1, Ordering::SeqCst),
@@ -30,11 +42,19 @@ impl DoctorFactory {
         }
     }
 
-    pub fn generate_vec_doctors(size: u64) -> Vec<Doctor> {
+    /// Generates a vector of Doctor structs of given size
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let doctor_vec = generate_vec_doctors(10, rng)
+    ///
+    /// assert_eq!(doctor_vec.len(), 10);
+    /// ```
+    pub fn generate_vec_doctors(size: u64, rng: &mut impl Rng) -> Vec<Doctor> {
         let mut dr_vec = Vec::new();
-        let mut rng = ChaCha8Rng::seed_from_u64(SEED);
         for _ in 0..size {
-            let dr = DoctorFactory::create_doctor(&mut rng);
+            let dr = DoctorFactory::create_doctor(rng);
             dr_vec.push(dr);
         }
         dr_vec
