@@ -7,11 +7,45 @@ static ID: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Debug)]
 pub struct Patient {
-    id: u64,
-    severity_score: u64,
-    time_of_arrival: u64,
-    time_waited: u64,
-    time_to_treat: u64,
+    pub id: u64,
+    pub severity_score: u64,
+    pub time_of_arrival: u64,
+    pub time_waited: u64,
+    pub time_to_treat: u64,
+}
+
+/// A minimized struct that takes Patient ID and position score that is stored in a BinaryHeap.
+/// This way, the BinaryHeap does not need to store Patients, but only their IDs.
+///
+/// When a patient is occupied by a doctor, they are taken off the queue.
+#[derive(Debug)]
+pub struct PatientPosition {
+    pub id: u64,
+    pub position_score: f64,
+}
+
+impl PartialEq for PatientPosition {
+    fn eq(&self, other: &Self) -> bool {
+        self.position_score - other.position_score < 0.00001
+    }
+}
+
+impl Eq for PatientPosition {}
+
+impl PartialOrd for PatientPosition {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(
+            self.position_score
+                .partial_cmp(&other.position_score)
+                .unwrap(),
+        )
+    }
+}
+
+impl Ord for PatientPosition {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.partial_cmp(other).unwrap()
+    }
 }
 
 pub struct PatientFactory;
