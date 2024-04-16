@@ -1,6 +1,9 @@
 name: Build, Lint and Test
 run-name: CI initiated by ${{ github.actor }}
 
+env:
+  RUSTFLAGS: "-Dwarnings"
+
 on:
   push:
     branches: [main]
