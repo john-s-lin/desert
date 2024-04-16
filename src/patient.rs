@@ -4,6 +4,7 @@ use rand::Rng;
 use rand_distr::{Distribution, Uniform};
 
 static ID: AtomicU64 = AtomicU64::new(0);
+const MAX_SHORT_TREATMENT_TIME_SCORE: u64 = 60;
 
 #[derive(Debug)]
 pub struct Patient {
@@ -12,6 +13,7 @@ pub struct Patient {
     pub time_of_arrival: u64,
     pub time_waited: u64,
     pub time_to_treat: u64,
+    pub short_treatment_time_score: u64,
 }
 
 /// A minimized struct that takes Patient ID and position score that is stored in a BinaryHeap.
@@ -56,12 +58,15 @@ impl PatientFactory {
     pub fn create_patient(rng: &mut impl Rng, time_of_arrival: u64) -> Patient {
         let severity_range = Uniform::new(0, 100);
         let treatment_time_range = Uniform::new(15, 60);
+        let time_to_treat = treatment_time_range.sample(rng);
+        let short_treatment_time_score = MAX_SHORT_TREATMENT_TIME_SCORE - time_to_treat;
         Patient {
             id: ID.fetch_add(1, Ordering::SeqCst),
             severity_score: severity_range.sample(rng),
             time_of_arrival,
             time_waited: 0,
-            time_to_treat: treatment_time_range.sample(rng),
+            time_to_treat,
+            short_treatment_time_score,
         }
     }
 }

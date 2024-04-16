@@ -38,13 +38,14 @@ impl SchedulerSingleQueue {
     ///     time_of_arrival: 0,
     ///     time_waited: 30,
     ///     time_to_treat: 18,
+    ///     short_treatment_time_score: 42,
     /// }
-    /// assert!((self.calculate_position_score(&pt) - 37.6).abs() > 1e-5);
+    /// assert!((self.calculate_position_score(&pt) - 42.4).abs() < 1e-5);
     /// ```
     pub fn calculate_position_score(&self, patient: &Patient) -> f64 {
         patient.severity_score as f64 * SEVERITY_RATIO
             + patient.time_waited as f64 * TIME_WAITED_RATIO
-            + patient.time_to_treat as f64 * SHORTEST_JOB_RATIO
+            + patient.short_treatment_time_score as f64 * SHORTEST_JOB_RATIO
     }
 }
 
@@ -62,10 +63,11 @@ mod tests {
             time_of_arrival: 0,
             time_waited: 30,
             time_to_treat: 18,
+            short_treatment_time_score: 42,
         };
         let queue = SchedulerSingleQueue::new();
         let val = queue.calculate_position_score(&pt);
-        let desired_ans = 37.6;
+        let desired_ans = 42.4;
         assert!((val - desired_ans).abs() < 1e-5);
     }
 }

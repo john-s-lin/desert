@@ -83,6 +83,10 @@ A patient can be simply represented as composed of `severity_score`, `time_of_ar
 
 `time_to_treat` should be an integer component, represented as minutes. Time-to-treat represents an estimated time to treat a patient once a doctor is seen, whether it be as an admittance as a hospital in-patient or a discharge. In this prototype, time-to-treat will be procedurally generated but will be no less than 15 minutes.
 
+`short_treatment_time_score` is a integer component, represented as an arbitrary value in the range of [0, 60]. It is represented as
+$$\text{score} = 60 - \text{time-to-treat}$$
+where `time_to_treat <= 60`
+
 ```python
 class Patient:
     def __init__(self):
@@ -90,9 +94,14 @@ class Patient:
         self.time_of_arrival: int = 0
         self.time_waited: int = 0
         self.time_to_treat: int = 0
+        self.short_treatment_time_score: int = 0
 
     def calculate_time_waited(self):
         self.time_waited = current_time_since_epoch - time_of_arrival
+
+    def calculate_short_treatment_time_score(self):
+        diff = 60 - self.time_to_treat
+        self.short_treatment_time_score = diff if diff > 0 else 0
 ```
 
 ### 2. Hybrid Priority Queue
@@ -112,7 +121,7 @@ class HybridTriageQueue:
         return (
             patient.severity_score * severity ratio +
             patient.time_waited * arrival_time_ratio +
-            patient.time_to_treat * encounter_duration_ratio
+            patient.short_treatment_time_score * encounter_duration_ratio
         )
 ```
 

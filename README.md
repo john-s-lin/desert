@@ -18,13 +18,20 @@ Here we propose a new triage paradigm using a toy example simulator, which not o
 
 We propose a hybrid scheduler that uses a `position_score` function incorporating severity, wait time, and time-to-treat as variables with arbitrary coefficients that can be tuned. In this toy example, we will be setting the `position_score` function as
 
-$$\text{position score} = 0.5 \times \text{severity score} + 0.3 \times \text{wait time} + 0.2 \times \text{time to treat}$$
+$$\text{position score} = 0.5 \times \text{severity score} + 0.3 \times \text{wait time} + 0.2 \times \text{short treatment time score}$$
 
 where
 
 - `severity_score` is a arbitrary integer between [0, 100], with higher being more severe. In this prototype, `severity_score` will be randomly assigned.
 - `wait_time` is a positive integer, representing minutes elapsed since arrival.
-- `time_to_treat` is a positive integer, representing estimated minutes for patient turnaround, either to be admitted as an in-patient or discharge. In this prototype, `time_to_treat` will be randomly assigned.
+- `short_treatment_time_score` is a positive integer, representing a score between [0, 60], based on `time_to_treat`. The lower the `time_to_treat`, the higher the `short_treatment_time_score`, which will be calculated as
+
+```python
+# Arbitrary linear function that gives highest scores to
+# lowest time_to_treat
+diff = 60 - time_to_treat
+score = diff if diff > 0 else 0
+```
 
 Additionally, we propose that as wait time increases, that severity score likewise increases. For example:
 
