@@ -1,4 +1,4 @@
-# hermes-proto
+# 🏥 hermes-proto
 
 Prototyping a better emergency room triaging scheduler.
 
