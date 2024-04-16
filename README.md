@@ -2,6 +2,10 @@
 
 Prototyping a better emergency room triaging scheduler.
 
+```
+This prototype is currently pre-alpha.
+```
+
 ## Background
 
 Even before the COVID-19 pandemic, hospital emergency departments (ED) have been under extraordinary strain, with a significant lack of healthcare providers and resources [[1]](#1). However, the current status quo for triage scheduling for ambulatory patients is a single-source triage assessment, usually done by a triage nurse. In Canada, patients in triage are categorized into five levels: Resuscitation, Emergent, Urgent, Less Urgent, and Non-Urgent, as defined by the Canadian Triage and Acuity Scale (CTAS) [[2]](#2). Various other countries implement a similar categorization scheme based on chief complaint and symptoms, including Simple Triage and Rapid Treatment (START) in the U.S. and the Australasian Triage Scale (ATS) in Australia [[3]](#3).
