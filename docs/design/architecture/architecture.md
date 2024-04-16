@@ -9,7 +9,7 @@ Date Created: 2024-04-09
 
 This document details the architectural design of a monolithic triaging engine as a clinical tool for improving patient wait times in the emergency department. It encompasses representations of doctors and patients as "entities" connected through one or more priority queues. Here, we'll explore different implementations of a triaging queue in the hopes of arriving at a more performant triaging paradigm.
 
-The prototype will be implemented in [Rust](https://www.rust-lang.org/).
+The prototype will be implemented in [Rust](https://www.rust-lang.org/). Additionally, due to issues with implementation in an OOP style as referenced in [this commit](https://github.com/john-s-lin/hermes-proto/commit/1848ba8fe92b9d71e4ce0ab8d0b76771b8b684ef), we'll be rewriting core components of this system in the Entity-Component System (ECS) style as described in [this talk](https://youtu.be/aKLntZcp27M?feature=shared) and [this blog post](https://kyren.github.io/2018/09/14/rustconf-talk.html).
 
 ## Glossary
 
