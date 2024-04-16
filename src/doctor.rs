@@ -3,6 +3,8 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use rand::Rng;
 use rand_distr::{Distribution, Uniform};
 
+use crate::patient::Patient;
+
 static ID: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Debug)]
@@ -11,6 +13,17 @@ pub struct Doctor {
     interaction_time: u64,
     efficiency: f32,
     burnout_rate: f32,
+}
+
+impl Doctor {
+    pub fn update_interaction_time(&mut self, patient: Patient) {
+        self.interaction_time +=
+            (patient.time_to_treat as f64 / self.efficiency as f64).round() as u64;
+    }
+
+    pub fn update_efficiency(&mut self) {
+        self.efficiency -= self.burnout_rate;
+    }
 }
 
 pub struct DoctorFactory;

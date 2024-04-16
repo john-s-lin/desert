@@ -1,8 +1,8 @@
-use rand::SeedableRng;
+use rand::{Rng, SeedableRng};
 use rand_chacha::ChaCha8Rng;
 
 use doctor::DoctorFactory;
-use patient::PatientFactory;
+use patient::{Patient, PatientFactory};
 use queue::SchedulerSingleQueue;
 
 mod doctor;
@@ -11,25 +11,28 @@ mod queue;
 
 const SEED: u64 = 0;
 
+// Set 1 tick = 1 min. Assume shift length = 8h = 480 min
+const MAX_TICKS: u64 = 480;
+
+// Set probability that patient will be entered into queue at 0.2 every tick cycle
+const PATIENT_PROBABILITY: f32 = 0.2;
+
 fn main() {
     let mut rng = ChaCha8Rng::seed_from_u64(SEED);
     let vec_docs = DoctorFactory::generate_vec_doctors(10, &mut rng);
-    dbg!(&vec_docs);
+    let mut vec_patients: Vec<Patient> = Vec::new();
+    let mut triage_queue = SchedulerSingleQueue::new();
 
-    let pt = PatientFactory::create_patient(&mut rng, 20);
-    dbg!(&pt);
+    for tick in 0..MAX_TICKS {
+        // Update time-waited for all patients and update position score
+        vec_patients
+            .iter()
+            .map(|&mut pt| pt.increment_time_waited());
 
-    let mut queue = SchedulerSingleQueue::new();
-    dbg!(&queue);
-    let val = queue.calculate_position_score(&pt);
-    dbg!(val);
-    queue.push(&pt);
-    dbg!(&queue);
-
-    for i in 0..10 {
-        let new_pt = PatientFactory::create_patient(&mut rng, 20 + i);
-        dbg!(&new_pt);
-        queue.push(&new_pt);
+        if rng.gen_range(0.0..1.0) < PATIENT_PROBABILITY {
+            let patient = PatientFactory::create_patient(&mut rng, tick);
+            triage_queue.push(&patient);
+            vec_patients.push(patient);
+        }
     }
-    dbg!(&queue);
 }

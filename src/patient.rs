@@ -16,6 +16,12 @@ pub struct Patient {
     pub short_treatment_time_score: u64,
 }
 
+impl Patient {
+    pub fn increment_time_waited(&mut self) {
+        self.time_waited += 1;
+    }
+}
+
 /// A minimized struct that takes Patient ID and position score that is stored in a BinaryHeap.
 /// This way, the BinaryHeap does not need to store Patients, but only their IDs.
 ///
