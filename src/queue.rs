@@ -39,7 +39,7 @@ impl SchedulerSingleQueue {
     ///     time_waited: 30,
     ///     time_to_treat: 18,
     /// }
-    /// assert!((self.calculate_position_score(&pt) - 37.6).abs() > 0.0001);
+    /// assert!((self.calculate_position_score(&pt) - 37.6).abs() > 1e-5);
     /// ```
     pub fn calculate_position_score(&self, patient: &Patient) -> f64 {
         patient.severity_score as f64 * SEVERITY_RATIO
@@ -66,6 +66,6 @@ mod tests {
         let queue = SchedulerSingleQueue::new();
         let val = queue.calculate_position_score(&pt);
         let desired_ans = 37.6;
-        assert!((val - desired_ans).abs() < 0.00001);
+        assert!((val - desired_ans).abs() < 1e-5);
     }
 }

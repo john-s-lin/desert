@@ -26,7 +26,9 @@ pub struct PatientPosition {
 
 impl PartialEq for PatientPosition {
     fn eq(&self, other: &Self) -> bool {
-        self.position_score - other.position_score < 0.00001
+        // To account for float arithmetic, we'll assume equality when
+        // the difference between two position_scores are less than 1E-5
+        self.position_score - other.position_score < 1e-5
     }
 }
 
