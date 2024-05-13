@@ -36,7 +36,6 @@ fn main() {
             triage_queue.push(&patient);
             vec_patients.push(patient);
         }
-
-        dbg!(&vec_patients);
     }
+    dbg!(&vec_patients);
 }
