@@ -75,3 +75,18 @@ Emergency Department Wait Times. University Health Network. https://www.uhn.ca/P
 
 <a id="8">[8]</a>
 Mike Crawley, (2022). Patients tell the inside story of Ontario's emergency rooms. CBC. https://www.cbc.ca/news/canada/toronto/ontario-emergency-room-stories-1.6509555
+
+## This work is Human Made
+
+![Human Made Mark](./docs/assets/humanmademark_black.svg)
+
+This section is inspired by Tristram Oaten [@No Boilerplate](https://www.youtube.com/@NoBoilerplate)'s recent YouTube video, [The Human Made Mark](https://youtu.be/qjPAWy_2FL0?feature=shared), along with the adjoining website, https://humanmademark.com/.
+
+All writings, documentation, and code are written solely by me, a human.
+
+As such, no code generation tools, LLMs nor AI-powered chatbots were used in any part of this project. This includes:
+
+- ChatGPT, Claude, Llama and all similarly designed LLMs
+- GitHub Copilot, Cursor and other similarly designed generative code completion tools based on LLMs
+
+I do not consider language-server protocols (LSPs) and Intellisense to be AI-augmented tools.
