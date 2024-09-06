@@ -1,9 +1,9 @@
-# `hermes-proto` Documentation
+# `dsert` Documentation
 
 ## Design
 
 - [Why diagrams as code?](./design/diagrams_as_code.md)
-- [`hermes-proto` architecture](./design/architecture/architecture.md)
+- [`dsert` architecture](./design/architecture/architecture.md)
 
 ## Style
 

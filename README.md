@@ -1,4 +1,6 @@
-# 🏥 hermes-proto
+# 🏥 dsert
+
+## Deterministic Simulator for Emergency Room Triage
 
 Prototyping a better emergency room triaging scheduler.
 
@@ -44,7 +46,7 @@ This "upgrade" of severity score as a function of wait time is arbitrarily imple
 
 ## Documentation
 
-Documentation on the implementation details of `hermes-proto` can be found in [`/docs`](./docs/).
+Documentation on the implementation details of `dsert` can be found in [`/docs`](./docs/).
 
 ### Architecture
 

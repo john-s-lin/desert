@@ -1,5 +1,5 @@
 {
-  "name": "hermes-docs",
+  "name": "dsert-docs",
   "dockerComposeFile": "../../docs/compose.yaml",
   "service": "devcontainer-docs",
   "workspaceFolder": "/docs",
