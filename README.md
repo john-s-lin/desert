@@ -5,7 +5,7 @@
 Prototyping a better emergency room triaging scheduler.
 
 ```
-This prototype is currently pre-alpha.
+This is a prototype.
 ```
 
 ## Background
