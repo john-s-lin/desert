@@ -5,8 +5,10 @@
 Prototyping a better emergency room triaging scheduler.
 
 ```
-This is a prototype. I am currently working on moving from an OOP to data-oriented framework by using concepts from Entity-Component-System design in similar to what you might find in game development.
+This is a prototype.
 ```
+
+> I am currently working on moving from an OOP to data-oriented framework by using concepts from Entity-Component-System design in similar to what you might find in game development.
 
 ## Background
 
