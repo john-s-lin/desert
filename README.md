@@ -1,4 +1,4 @@
-# 🏥 dsert
+# 🏥 DeSERT
 
 ## Deterministic Simulator for Emergency Room Triage
 
@@ -48,7 +48,7 @@ This "upgrade" of severity score as a function of wait time is arbitrarily imple
 
 ## Documentation
 
-Documentation on the implementation details of `dsert` can be found in [`/docs`](./docs/).
+Documentation on the implementation details of `desert` can be found in [`/docs`](./docs/).
 
 ### Architecture
 

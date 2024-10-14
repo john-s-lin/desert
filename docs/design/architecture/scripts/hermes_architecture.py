@@ -2,8 +2,8 @@ from diagrams import Diagram
 from diagrams.c4 import Container, Person, Relationship, SystemBoundary
 
 with Diagram(
-    name="DSERT Hybrid Single-Queue",
-    filename="../assets/dsert-single-queue",
+    name="DeSERT Hybrid Single-Queue",
+    filename="../assets/desert-single-queue",
     outformat="svg",
     show=False,
 ):
@@ -19,8 +19,8 @@ with Diagram(
     queue >> Relationship("Highest priority patient is seen") >> doctor
 
 with Diagram(
-    name="DSERT Multi-Queue",
-    filename="../assets/dsert-multi-queue",
+    name="DeSERT Multi-Queue",
+    filename="../assets/desert-multi-queue",
     outformat="svg",
     show=False,
 ):

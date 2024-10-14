@@ -1,4 +1,4 @@
-# `dsert` Architecture
+# `desert` Architecture
 
 ```
 Author: John Lin @john-s-lin
@@ -9,7 +9,7 @@ Date Created: 2024-04-09
 
 This document details the architectural design of a monolithic triaging engine as a clinical tool for improving patient wait times in the emergency department. It encompasses representations of doctors and patients as "entities" connected through one or more priority queues. Here, we'll explore different implementations of a triaging queue in the hopes of arriving at a more performant triaging paradigm.
 
-The prototype will be implemented in [Rust](https://www.rust-lang.org/). Additionally, due to issues with implementation in an OOP style as referenced in [this commit](https://github.com/john-s-lin/dsert/commit/1848ba8fe92b9d71e4ce0ab8d0b76771b8b684ef), we'll be rewriting core components of this system in the Entity-Component System (ECS) style as described in [this talk](https://youtu.be/aKLntZcp27M?feature=shared) and [this blog post](https://kyren.github.io/2018/09/14/rustconf-talk.html).
+The prototype will be implemented in [Rust](https://www.rust-lang.org/). Additionally, due to issues with implementation in an OOP style as referenced in [this commit](https://github.com/john-s-lin/desert/commit/1848ba8fe92b9d71e4ce0ab8d0b76771b8b684ef), we'll be rewriting core components of this system in the Entity-Component System (ECS) style as described in [this talk](https://youtu.be/aKLntZcp27M?feature=shared) and [this blog post](https://kyren.github.io/2018/09/14/rustconf-talk.html).
 
 ## Glossary
 
@@ -53,7 +53,7 @@ In any typical software engineering/computer science degree, one course is usual
 
 ## High-Level Design
 
-![hermes-single-queue](./assets/dsert-single-queue.svg)
+![hermes-single-queue](./assets/desert-single-queue.svg)
 
 ### PatientStream
 
@@ -163,7 +163,7 @@ class Doctor:
 
 ## Alternatives Considered
 
-![hermes-multi-queue](./assets/dsert-multi-queue.svg)
+![hermes-multi-queue](./assets/desert-multi-queue.svg)
 
 We considered using a multi-level queue scheduler, with separate queues representing severity (priority), time-of-arrival (FCFS), and time-to-treat (SJF). The order of patients to be served would be determined by majority consensus in all three queues so that patients with the collective lowest rank get seen first. This comes with a few drawbacks:
 

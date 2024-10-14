@@ -1,5 +1,5 @@
 {
-  "name": "dsert-docs",
+  "name": "desert-docs",
   "dockerComposeFile": "../../docs/compose.yaml",
   "service": "devcontainer-docs",
   "workspaceFolder": "/docs",

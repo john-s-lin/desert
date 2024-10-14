@@ -9,7 +9,7 @@ Date Created: 2024-04-11
 
 This document describes a software engineering practice called "Tiger Style", first coined by Joran Dirk Greef of [TigerBeetle](https://tigerbeetle.com/) in [this talk](https://youtu.be/w3WYdYyjek4?feature=shared) and in [this document](https://github.com/tigerbeetle/tigerbeetle/blob/81806334726ef7438c74d5f630b126b32431663a/docs/TIGER_STYLE.md).
 
-The purpose of Tiger Style is to develop safe, performant systems in a short amount of time. `dsert` will be developed with a focus on three concepts mentioned in Tiger Style:
+The purpose of Tiger Style is to develop safe, performant systems in a short amount of time. `desert` will be developed with a focus on three concepts mentioned in Tiger Style:
 
 1. Spending a little more time on design speeds up development and prevents technical debt from working around a bad, non-optimal design.
 2. Assertions within source code ensures safe failovers and correct code.
@@ -19,7 +19,7 @@ The purpose of Tiger Style is to develop safe, performant systems in a short amo
 
 ### Why invest in design first, code after?
 
-Bad design compounds over time. That's why we're spending a little more time on the drawing board, figuring out the optimal architecture for `dsert`. Good design has _relatively_ good performance baked in.
+Bad design compounds over time. That's why we're spending a little more time on the drawing board, figuring out the optimal architecture for `desert`. Good design has _relatively_ good performance baked in.
 
 ### Why not relegate assertions to tests only, instead of also in source code?
 

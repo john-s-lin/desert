@@ -1,9 +1,9 @@
-# `dsert` Documentation
+# `desert` Documentation
 
 ## Design
 
 - [Why diagrams as code?](./design/diagrams_as_code.md)
-- [`dsert` architecture](./design/architecture/architecture.md)
+- [`desert` architecture](./design/architecture/architecture.md)
 
 ## Style
 
