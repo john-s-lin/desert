@@ -53,7 +53,7 @@ In any typical software engineering/computer science degree, one course is usual
 
 ## High-Level Design
 
-![hermes-single-queue](./assets/desert-single-queue.svg)
+![desert-single-queue](./assets/desert-single-queue.svg)
 
 ### PatientStream
 
@@ -163,7 +163,7 @@ class Doctor:
 
 ## Alternatives Considered
 
-![hermes-multi-queue](./assets/desert-multi-queue.svg)
+![desert-multi-queue](./assets/desert-multi-queue.svg)
 
 We considered using a multi-level queue scheduler, with separate queues representing severity (priority), time-of-arrival (FCFS), and time-to-treat (SJF). The order of patients to be served would be determined by majority consensus in all three queues so that patients with the collective lowest rank get seen first. This comes with a few drawbacks:
 
